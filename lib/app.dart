@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/ui/views/home.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter_auth/ui/views/login.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,7 +8,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }
