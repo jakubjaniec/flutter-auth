@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/ui/widgets/buttons.dart';
 import 'package:flutter_auth/ui/widgets/input.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,23 +56,30 @@ class RegisterScreen extends StatelessWidget {
                     InputField(
                       text: 'name',
                       icon: Icons.person_outline,
+                      controller: nameController,
                     ),
                     SizedBox(height: 15.0),
                     InputField(
                       text: 'email',
                       icon: Icons.mail_outline,
+                      controller: emailController,
                     ),
                     SizedBox(height: 15.0),
                     InputField(
                       text: 'password',
                       icon: Icons.lock_outline,
+                      controller: passwordController,
                     ),
                     SizedBox(height: 30.0),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          MainActionButton(text: 'Sign up'),
+                          MainActionButton(
+                            text: 'Sign up',
+                            emailValue: emailController.text.trim(),
+                            passwordValue: passwordController.text.trim(),
+                          ),
                           SizedBox(height: 40.0),
                           RoutingButton(text: 'Login'),
                         ],

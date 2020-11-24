@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth/ui/widgets/buttons.dart';
 import 'package:flutter_auth/ui/widgets/input.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +53,24 @@ class LoginScreen extends StatelessWidget {
                     InputField(
                       text: 'email',
                       icon: Icons.mail_outline,
+                      controller: emailController,
                     ),
                     SizedBox(height: 20.0),
                     InputField(
                       text: 'password',
                       icon: Icons.lock_outline,
+                      controller: passwordController,
                     ),
                     SizedBox(height: 30.0),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          MainActionButton(text: 'Log in'),
+                          MainActionButton(
+                            text: 'Log in',
+                            emailValue: emailController.text.trim(),
+                            passwordValue: passwordController.text.trim(),
+                          ),
                           SizedBox(height: 15.0),
                           Center(child: Text('Forgot password?')),
                           SizedBox(height: 40.0),

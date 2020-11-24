@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class InputField extends StatelessWidget {
   final String text;
   final IconData icon;
+  final TextEditingController controller;
 
-  InputField({this.text, this.icon});
+  InputField({this.text, this.icon, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       obscureText: text == 'password' ?? true,
       decoration: InputDecoration(
         prefixIcon: Icon(
