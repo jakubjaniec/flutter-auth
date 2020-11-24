@@ -1,3 +1,4 @@
+import 'package:device_preview/plugins.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,9 @@ void main() async {
     DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => App(),
+      plugins: [
+        const ScreenshotPlugin(),
+      ],
     ),
   );
 }

@@ -1,16 +1,57 @@
-# flutter_auth
+# :beginner: Flutter Auth
 
-A new Flutter project.
+Firebase authentication app written in Flutter
 
-## Getting Started
+## :book: Table of contents
 
-This project is a starting point for a Flutter application.
+- [General info](#general-info)
+- [Technologies](#technologies)
+- [Screenshots](#screenshots)
+- [Setup](#setup)
 
-A few resources to get you started if this is your first Flutter project:
+## :pencil: General info
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Simple app that provides user authentication.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## :gear: Technologies
+
+Project is created with:
+
+- [Flutter](https://flutter.dev/) version: 1.20.0
+- [Dart](https://dart.dev/) version: 2.9.0
+- [Firebase_core](https://pub.dev/packages/firebase_core) version: 0.5.2
+- [Firebase_auth](https://pub.dev/packages/firebase_auth) version: 0.18.3
+- [Cloud_firestore](https://pub.dev/packages/cloud_firestore) version: 0.14.3
+- [Device_preview](https://pub.dev/packages/device_preview) version: 0.5.5
+
+## :camera_flash: Screenshots
+
+<img src="assets/screenshots/ss-1.png" width="270"> <img src="assets/screenshots/ss-2.png" width="270">
+
+## :computer: Setup
+
+To run this project follow these steps:
+
+1. Clone the repository
+
+```
+$ git clone https://github.com/kubacarbon/flutter-auth.git
+```
+
+2. Open the project
+
+```
+$ cd flutter-auth
+```
+
+3. Install dependencies
+
+```
+flutter pub get
+```
+
+4. Run app
+
+```
+$ flutter run
+```
