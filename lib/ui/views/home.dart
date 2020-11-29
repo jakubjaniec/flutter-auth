@@ -1,32 +1,78 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/services/auth.dart';
+import 'package:flutter_auth/services/database.dart';
 import 'package:flutter_auth/ui/widgets/buttons.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var user = context.watch<AuthService>().user;
-
     return Scaffold(
       body: StreamBuilder(
-        stream: user,
+        stream: context.watch<AuthService>().user,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (!snapshot.hasData) return CircularProgressIndicator();
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text('${snapshot.data.uid}'),
-                SignOutButton(),
-              ],
-            ),
-          );
+          if (snapshot.data == null) return CircularProgressIndicator();
+          var uid = snapshot.data.uid;
+
+          return StreamBuilder(
+              stream: context.watch<FirestoreService>().users(uid),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.data == null) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                return Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('uid: ${snapshot.data.data()['uid']}'),
+                      Text('name: ${snapshot.data.data()['name']}'),
+                      SignOutButton(),
+                    ],
+                  ),
+                );
+              });
         },
       ),
     );
   }
 }
+
+// class HomeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: StreamBuilder(
+//         stream: context.watch<AuthService>().user,
+//         builder: (BuildContext context, AsyncSnapshot snapshot) {
+//           if (snapshot.data == null) return CircularProgressIndicator();
+//           var uid = snapshot.data.uid;
+//           return StreamBuilder(
+//               stream: context.watch<FirestoreService>().users,
+//               builder: (BuildContext context, AsyncSnapshot snapshot) {
+//                 if (snapshot.data == null) return CircularProgressIndicator();
+//                 return Column(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Row(
+//                         mainAxisAlignment: MainAxisAlignment.center,
+//                         children: snapshot.data.docs.map<Widget>((doc) {
+//                           if (doc.data()['uid'] == uid) {
+//                             return Text(doc.data()['uid']);
+//                           }
+
+//                           return Container();
+//                         }).toList()),
+//                   ],
+//                 );
+//               });
+//         },
+//       ),
+//     );
+//   }
+// }

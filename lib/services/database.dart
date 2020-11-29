@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
-  // FirebaseFirestore _db = FirebaseFirestore.instance;
-
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('users');
 
   Future<void> addUser({uid, name}) {
-    return users
+    print(uid);
+    return usersCollection
         .doc(uid)
         .set({
           'uid': uid,
@@ -14,5 +14,9 @@ class FirestoreService {
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to add user: $error'));
+  }
+
+  Stream users(uid) {
+    return usersCollection.doc(uid).snapshots();
   }
 }

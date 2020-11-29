@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_auth/models/user.dart';
+import 'package:flutter_auth/services/database.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
@@ -27,6 +28,7 @@ class AuthService {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       await _createUserModel(_auth.currentUser);
+      await FirestoreService().addUser(uid: _auth.currentUser.uid, name: name);
       return true;
     } on FirebaseException catch (e) {
       print(e);

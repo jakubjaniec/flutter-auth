@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/services/auth.dart';
-import 'package:flutter_auth/services/database.dart';
+import 'package:flutter_auth/ui/views/home.dart';
+import 'package:flutter_auth/ui/views/login.dart';
+import 'package:flutter_auth/ui/views/register.dart';
 import 'package:provider/provider.dart';
 
 class MainActionButton extends StatelessWidget {
@@ -29,21 +30,28 @@ class MainActionButton extends StatelessWidget {
                     .read<AuthService>()
                     .signIn(email: emailValue, password: passwordValue);
                 if (result) {
-                  await Navigator.pushReplacementNamed(context, '/');
+                  await Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
                 }
               }
               break;
             case 'Sign up':
               {
-                var result = await context
-                    .read<AuthService>()
-                    .signUp(email: emailValue, password: passwordValue);
+                var result = await context.read<AuthService>().signUp(
+                    email: emailValue,
+                    password: passwordValue,
+                    name: nameValue);
                 if (result) {
-                  var uid = context.read<UserModel>().uid;
-                  await context
-                      .read<FirestoreService>()
-                      .addUser(uid: uid, name: nameValue);
-                  await Navigator.pushReplacementNamed(context, '/login');
+                  await Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
                 }
               }
               break;
@@ -71,9 +79,19 @@ class RoutingButton extends StatelessWidget {
       child: RaisedButton(
         onPressed: () {
           if (text == 'Login') {
-            Navigator.pushNamed(context, '/login');
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
           } else if (text == 'Sign up') {
-            Navigator.pushNamed(context, '/register');
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RegisterScreen(),
+              ),
+            );
           }
         },
         color: Colors.white,
@@ -96,7 +114,12 @@ class SignOutButton extends StatelessWidget {
       onPressed: () async {
         var result = await context.read<AuthService>().signOut();
         if (result) {
-          await Navigator.pushReplacementNamed(context, '/login');
+          await Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
+            ),
+          );
         }
       },
       child: Text('Sign out'),
