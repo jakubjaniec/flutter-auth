@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_auth/models/user.dart';
 import 'package:flutter_auth/services/auth.dart';
+import 'package:flutter_auth/services/database.dart';
 import 'package:provider/provider.dart';
 
 class MainActionButton extends StatelessWidget {
@@ -37,6 +39,10 @@ class MainActionButton extends StatelessWidget {
                     .read<AuthService>()
                     .signUp(email: emailValue, password: passwordValue);
                 if (result) {
+                  var uid = context.read<UserModel>().uid;
+                  await context
+                      .read<FirestoreService>()
+                      .addUser(uid: uid, name: nameValue);
                   await Navigator.pushReplacementNamed(context, '/login');
                 }
               }

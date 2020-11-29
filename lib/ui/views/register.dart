@@ -77,6 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           MainActionButton(
                             text: 'Sign up',
+                            nameValue: nameController.text.trim(),
                             emailValue: emailController.text.trim(),
                             passwordValue: passwordController.text.trim(),
                           ),
