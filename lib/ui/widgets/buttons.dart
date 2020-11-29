@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class MainActionButton extends StatelessWidget {
   final String text;
   final String nameValue;
   final String emailValue;
   final String passwordValue;
-  final AuthService auth = AuthService();
 
   MainActionButton({
     this.text,
@@ -23,8 +23,9 @@ class MainActionButton extends StatelessWidget {
           switch (text) {
             case 'Log in':
               {
-                var result = await auth.signIn(
-                    email: emailValue, password: passwordValue);
+                var result = await context
+                    .read<AuthService>()
+                    .signIn(email: emailValue, password: passwordValue);
                 if (result) {
                   await Navigator.pushReplacementNamed(context, '/');
                 }
@@ -32,8 +33,9 @@ class MainActionButton extends StatelessWidget {
               break;
             case 'Sign up':
               {
-                var result = await auth.signUp(
-                    email: emailValue, password: passwordValue);
+                var result = await context
+                    .read<AuthService>()
+                    .signUp(email: emailValue, password: passwordValue);
                 if (result) {
                   await Navigator.pushReplacementNamed(context, '/login');
                 }
@@ -82,13 +84,11 @@ class RoutingButton extends StatelessWidget {
 }
 
 class SignOutButton extends StatelessWidget {
-  final AuthService auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: () async {
-        var result = await auth.signOut();
+        var result = await context.read<AuthService>().signOut();
         if (result) {
           await Navigator.pushReplacementNamed(context, '/login');
         }
