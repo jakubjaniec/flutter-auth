@@ -82,7 +82,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             passwordValue: passwordController.text.trim(),
                           ),
                           SizedBox(height: 40.0),
-                          RoutingButton(text: 'Login'),
+                          Expanded(child: RoutingButton(text: 'Login')),
                         ],
                       ),
                     ),

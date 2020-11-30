@@ -22,11 +22,12 @@ Project is created with:
 - [Firebase_core](https://pub.dev/packages/firebase_core) version: 0.5.2
 - [Firebase_auth](https://pub.dev/packages/firebase_auth) version: 0.18.3
 - [Cloud_firestore](https://pub.dev/packages/cloud_firestore) version: 0.14.3
+- [Provider](https://pub.dev/packages/provider) version: 4.3.2+2
 - [Device_preview](https://pub.dev/packages/device_preview) version: 0.5.5
 
 ## :camera_flash: Screenshots
 
-<img src="assets/screenshots/ss-1.png" width="270"> <img src="assets/screenshots/ss-2.png" width="270">
+<img src="assets/screenshots/ss-0.png" width="270"> <img src="assets/screenshots/ss-1.png" width="270"> <img src="assets/screenshots/ss-2.png" width="270">
 
 ## :computer: Setup
 

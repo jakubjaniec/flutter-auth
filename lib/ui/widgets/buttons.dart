@@ -70,37 +70,42 @@ class MainActionButton extends StatelessWidget {
 
 class RoutingButton extends StatelessWidget {
   final String text;
+  final Color textColor;
+  final Color bgColor;
+  final String pageType;
 
-  RoutingButton({this.text});
+  RoutingButton(
+      {this.text,
+      this.textColor = Colors.black,
+      this.bgColor = Colors.white,
+      this.pageType});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: RaisedButton(
-        onPressed: () {
-          if (text == 'Login') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => LoginScreen(),
-              ),
-            );
-          } else if (text == 'Sign up') {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => RegisterScreen(),
-              ),
-            );
-          }
-        },
-        color: Colors.white,
-        child: Text('$text'),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-          side: BorderSide(
-            color: Colors.grey[400],
-          ),
+    return RaisedButton(
+      onPressed: () {
+        if (text == 'Login') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
+            ),
+          );
+        } else if (text == 'Sign up') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegisterScreen(),
+            ),
+          );
+        }
+      },
+      color: bgColor,
+      child: Text('$text', style: TextStyle(color: textColor)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(
+          color: pageType != 'start' ? Colors.grey[400] : Colors.transparent,
         ),
       ),
     );

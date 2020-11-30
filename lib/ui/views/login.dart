@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(height: 15.0),
                           Center(child: Text('Forgot password?')),
                           SizedBox(height: 40.0),
-                          RoutingButton(text: 'Sign up'),
+                          Expanded(child: RoutingButton(text: 'Sign up')),
                         ],
                       ),
                     ),

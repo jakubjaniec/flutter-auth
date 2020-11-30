@@ -42,37 +42,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-// class HomeScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: StreamBuilder(
-//         stream: context.watch<AuthService>().user,
-//         builder: (BuildContext context, AsyncSnapshot snapshot) {
-//           if (snapshot.data == null) return CircularProgressIndicator();
-//           var uid = snapshot.data.uid;
-//           return StreamBuilder(
-//               stream: context.watch<FirestoreService>().users,
-//               builder: (BuildContext context, AsyncSnapshot snapshot) {
-//                 if (snapshot.data == null) return CircularProgressIndicator();
-//                 return Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     Row(
-//                         mainAxisAlignment: MainAxisAlignment.center,
-//                         children: snapshot.data.docs.map<Widget>((doc) {
-//                           if (doc.data()['uid'] == uid) {
-//                             return Text(doc.data()['uid']);
-//                           }
-
-//                           return Container();
-//                         }).toList()),
-//                   ],
-//                 );
-//               });
-//         },
-//       ),
-//     );
-//   }
-// }
