@@ -14,11 +14,11 @@ class StartScreen extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/bg-img4.jpg',
+              'assets/images/bg-img1.jpg',
               color: Colors.black.withOpacity(0.4),
               colorBlendMode: BlendMode.darken,
               fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
+              height: height,
             ),
             Container(
               padding: EdgeInsets.symmetric(
@@ -32,16 +32,17 @@ class StartScreen extends StatelessWidget {
                   Text(
                     'Fashiony\nmodern fashion shop.',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: height * 0.038,
-                        fontWeight: FontWeight.w700,
-                        shadows: [
-                          Shadow(
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 3.0,
-                            color: Color.fromARGB(255, 0, 0, 0),
-                          )
-                        ]),
+                      color: Colors.white,
+                      fontSize: height * 0.038,
+                      fontWeight: FontWeight.w700,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(1.0, 1.0),
+                          blurRadius: 3.0,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: height * 0.05,

@@ -22,7 +22,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/bg-img3.jpg',
+              'assets/images/bg-img2.jpg',
               color: Colors.black.withOpacity(0.5),
               colorBlendMode: BlendMode.darken,
               fit: BoxFit.cover,
