@@ -57,7 +57,9 @@ class MainActionButton extends StatelessWidget {
               break;
           }
         },
-        child: Text('$text'),
+        child: Text('$text',
+            style:
+                TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02)),
         color: Colors.yellow[800],
         textColor: Colors.white,
         shape: RoundedRectangleBorder(
@@ -73,15 +75,20 @@ class RoutingButton extends StatelessWidget {
   final Color textColor;
   final Color bgColor;
   final String pageType;
+  final double fontSize;
 
-  RoutingButton(
-      {this.text,
-      this.textColor = Colors.black,
-      this.bgColor = Colors.white,
-      this.pageType});
+  RoutingButton({
+    this.text,
+    this.textColor = Colors.black,
+    this.bgColor = Colors.white,
+    this.pageType,
+    this.fontSize,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+
     return RaisedButton(
       onPressed: () {
         if (text == 'Login') {
@@ -101,7 +108,11 @@ class RoutingButton extends StatelessWidget {
         }
       },
       color: bgColor,
-      child: Text('$text', style: TextStyle(color: textColor)),
+      child: Text('$text',
+          style: TextStyle(
+            color: textColor,
+            fontSize: height * 0.02,
+          )),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: BorderSide(

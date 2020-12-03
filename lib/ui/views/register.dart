@@ -14,6 +14,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         child: Stack(
@@ -23,16 +26,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               color: Colors.black.withOpacity(0.5),
               colorBlendMode: BlendMode.darken,
               fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
+              height: height,
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                  vertical: 40.0,
+                  horizontal: width * 0.084,
+                  vertical: height * 0.054,
                 ),
-                height: MediaQuery.of(context).size.height / 1.45,
+                height: height / 1.45,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -46,31 +49,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Text('Create an account',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 22.0,
+                          fontSize: height * 0.03,
                         )),
                     SizedBox(
-                      height: 15.0,
+                      height: height * 0.02,
                     ),
-                    Text('Start your carrer with us'),
-                    SizedBox(height: 20.0),
+                    Text(
+                      'Start your carrer with us',
+                      style: TextStyle(fontSize: height * 0.019),
+                    ),
+                    SizedBox(
+                      height: height * 0.028,
+                    ),
                     InputField(
                       text: 'name',
                       icon: Icons.person_outline,
                       controller: nameController,
                     ),
-                    SizedBox(height: 15.0),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
                     InputField(
                       text: 'email',
                       icon: Icons.mail_outline,
                       controller: emailController,
                     ),
-                    SizedBox(height: 15.0),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
                     InputField(
                       text: 'password',
                       icon: Icons.lock_outline,
                       controller: passwordController,
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(
+                      height: height * 0.04,
+                    ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -81,8 +95,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             emailValue: emailController.text.trim(),
                             passwordValue: passwordController.text.trim(),
                           ),
-                          SizedBox(height: 40.0),
-                          Expanded(child: RoutingButton(text: 'Login')),
+                          SizedBox(
+                            height: height * 0.052,
+                          ),
+                          Expanded(
+                            child: RoutingButton(text: 'Login'),
+                          ),
                         ],
                       ),
                     ),

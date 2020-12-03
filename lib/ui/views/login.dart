@@ -13,6 +13,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         child: Stack(
@@ -22,16 +25,16 @@ class _LoginScreenState extends State<LoginScreen> {
               color: Colors.black.withOpacity(0.5),
               colorBlendMode: BlendMode.darken,
               fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
+              height: height,
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 30.0,
-                  vertical: 40.0,
+                  horizontal: width * 0.084,
+                  vertical: height * 0.054,
                 ),
-                height: MediaQuery.of(context).size.height / 1.55,
+                height: height / 1.55,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -45,23 +48,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text('Welcome Fashionista!',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 22.0,
+                          fontSize: height * 0.03,
                         )),
-                    SizedBox(height: 15.0),
-                    Text('Sign in to continue'),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: height * 0.02),
+                    Text(
+                      'Sign in to continue',
+                      style: TextStyle(fontSize: height * 0.019),
+                    ),
+                    SizedBox(height: height * 0.027),
                     InputField(
                       text: 'email',
                       icon: Icons.mail_outline,
                       controller: emailController,
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: height * 0.027),
                     InputField(
                       text: 'password',
                       icon: Icons.lock_outline,
                       controller: passwordController,
                     ),
-                    SizedBox(height: 30.0),
+                    SizedBox(height: height * 0.04),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,10 +77,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             emailValue: emailController.text.trim(),
                             passwordValue: passwordController.text.trim(),
                           ),
-                          SizedBox(height: 15.0),
-                          Center(child: Text('Forgot password?')),
-                          SizedBox(height: 40.0),
-                          Expanded(child: RoutingButton(text: 'Sign up')),
+                          SizedBox(height: height * 0.02),
+                          Center(
+                              child: Text(
+                            'Forgot password?',
+                            style: TextStyle(fontSize: height * 0.0187),
+                          )),
+                          SizedBox(height: height * 0.055),
+                          Expanded(
+                            child: RoutingButton(text: 'Sign up'),
+                          ),
                         ],
                       ),
                     ),

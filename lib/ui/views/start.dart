@@ -4,6 +4,9 @@ import 'package:flutter_auth/ui/widgets/buttons.dart';
 class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -30,7 +33,7 @@ class StartScreen extends StatelessWidget {
                     'Fashiony\nmodern fashion shop.',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: height * 0.038,
                         fontWeight: FontWeight.w700,
                         shadows: [
                           Shadow(
@@ -40,13 +43,15 @@ class StartScreen extends StatelessWidget {
                           )
                         ]),
                   ),
-                  SizedBox(height: 35.0),
+                  SizedBox(
+                    height: height * 0.05,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         child: SizedBox(
-                          height: 50,
+                          height: height * 0.07,
                           child: RoutingButton(
                             text: 'Login',
                             bgColor: Colors.black.withOpacity(0.7),
@@ -55,10 +60,12 @@ class StartScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      SizedBox(
+                        width: width * 0.03,
+                      ),
                       Expanded(
                         child: SizedBox(
-                          height: 50,
+                          height: height * 0.07,
                           child: RoutingButton(
                             text: 'Sign up',
                             bgColor: Colors.yellow,
