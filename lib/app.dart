@@ -17,9 +17,11 @@ class App extends StatelessWidget {
           create: (_) => FirestoreService(),
         ),
         StreamProvider(
+          initialData: '',
           create: (context) => context.read<AuthService>().authStateChanges,
         ),
         StreamProvider(
+          initialData: '',
           create: (context) => context.read<AuthService>().user,
         ),
       ],

@@ -15,7 +15,7 @@ class AuthService {
   Future<bool> signIn({String email, String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      await _createUserModel(_auth.currentUser);
+      _createUserModel(_auth.currentUser);
       return true;
     } on FirebaseException catch (e) {
       print(e);
@@ -27,7 +27,7 @@ class AuthService {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await _createUserModel(_auth.currentUser);
+      _createUserModel(_auth.currentUser);
       await FirestoreService().addUser(uid: _auth.currentUser.uid, name: name);
       return true;
     } on FirebaseException catch (e) {

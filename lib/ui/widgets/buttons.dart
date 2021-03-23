@@ -18,52 +18,57 @@ class MainActionButton extends StatelessWidget {
     this.passwordValue,
   });
 
+  void handleButtonClick(BuildContext context) async {
+    switch (text) {
+      case 'Log in':
+        {
+          var result = await context
+              .read<AuthService>()
+              .signIn(email: emailValue, password: passwordValue);
+          if (result) {
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            );
+          }
+        }
+        break;
+      case 'Sign up':
+        {
+          var result = await context.read<AuthService>().signUp(
+              email: emailValue, password: passwordValue, name: nameValue);
+          if (result) {
+            await Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
+          }
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: RaisedButton(
-        onPressed: () async {
-          switch (text) {
-            case 'Log in':
-              {
-                var result = await context
-                    .read<AuthService>()
-                    .signIn(email: emailValue, password: passwordValue);
-                if (result) {
-                  await Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ),
-                  );
-                }
-              }
-              break;
-            case 'Sign up':
-              {
-                var result = await context.read<AuthService>().signUp(
-                    email: emailValue,
-                    password: passwordValue,
-                    name: nameValue);
-                if (result) {
-                  await Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
-                }
-              }
-              break;
-          }
-        },
-        child: Text('$text',
-            style:
-                TextStyle(fontSize: MediaQuery.of(context).size.height * 0.02)),
-        color: Colors.yellow[800],
-        textColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.yellow[800],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+        onPressed: () => handleButtonClick(context),
+        child: Text(
+          '$text',
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.height * 0.02,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -85,40 +90,43 @@ class RoutingButton extends StatelessWidget {
     this.fontSize,
   });
 
+  void checkCurrentRoute(BuildContext context) {
+    if (text == 'Login') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginScreen(),
+        ),
+      );
+    } else if (text == 'Sign up') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RegisterScreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
 
-    return RaisedButton(
-      onPressed: () {
-        if (text == 'Login') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ),
-          );
-        } else if (text == 'Sign up') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => RegisterScreen(),
-            ),
-          );
-        }
-      },
-      color: bgColor,
+    return ElevatedButton(
+      onPressed: () => checkCurrentRoute(context),
+      style: ElevatedButton.styleFrom(
+          primary: bgColor,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              side: BorderSide(
+                color:
+                    pageType != 'start' ? Colors.grey[400] : Colors.transparent,
+              ))),
       child: Text('$text',
           style: TextStyle(
             color: textColor,
             fontSize: height * 0.02,
           )),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(
-          color: pageType != 'start' ? Colors.grey[400] : Colors.transparent,
-        ),
-      ),
     );
   }
 }
@@ -126,7 +134,7 @@ class RoutingButton extends StatelessWidget {
 class SignOutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: () async {
         var result = await context.read<AuthService>().signOut();
         if (result) {
@@ -138,12 +146,15 @@ class SignOutButton extends StatelessWidget {
           );
         }
       },
-      child: Text('Sign out'),
-      color: Colors.yellow[800],
-      textColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
+      style: ElevatedButton.styleFrom(
+          primary: Colors.yellow[800],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          )),
+      child: Text('Sign out',
+          style: TextStyle(
+            color: Colors.white,
+          )),
     );
   }
 }
